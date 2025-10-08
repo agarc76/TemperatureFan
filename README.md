@@ -3,7 +3,11 @@ This project is a AI assisted fan. It begins with the user entering a room, or i
 
 # Requirements
 Arduino IDE
+
 Arduino Mega 2560
+
 Python 3.11
+
 Speech Recognition 3.14
+
 PySerial
