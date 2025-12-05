@@ -1,13 +1,7 @@
 #include <DHT.h>
 
-
-
-
 const int motorIn1 = 9;  
 const int motorIn2 = 10;
-
-
-
 
 // --- Pin setup ---
 #define LED_PIN 8
@@ -15,28 +9,17 @@ const int motorIn2 = 10;
 #define DHT_PIN 4
 #define DHT_TYPE DHT11       // Change to DHT22 if needed
 
-
-
-
 // --- Globals ---
 DHT dht(DHT_PIN, DHT_TYPE);
 
-
-
-
 bool tempControlEnabled = false;  // Start OFF
 float tempThreshold = 35.0;       // Temperature threshold in °C
-
-
-
 
 bool ledState = false;
 bool lastButtonState = LOW;
 unsigned long lastDebounceTime = 0;
 const unsigned long debounceDelay = 50;
 int reading = 0;
-
-
 
 
 void setup() {
@@ -47,20 +30,12 @@ void setup() {
   Serial.begin(9600);
   dht.begin();
 
-
-
-
   digitalWrite(LED_PIN, LOW);
   stopFan();
-
-
-
 
   Serial.println("Temperature Control System Ready.");
   Serial.println("Press button to toggle ON/OFF.");
 }
-
-
 
 
 void loop() {
@@ -70,9 +45,6 @@ void loop() {
     if (reading == HIGH && lastButtonState == LOW) {
       ledState = !ledState;
       Serial.println(ledState);
-
-
-
 
       if (ledState == HIGH) {
         stopFan();
@@ -85,8 +57,6 @@ void loop() {
       }
     }
     lastButtonState = reading;
-
-
 
 
   //fan stuff
@@ -105,29 +75,17 @@ void loop() {
     temp();
   }
 
-
-
-
 }
-
-
-
 
 void fanON() {
   analogWrite(motorIn1, 200);  //set the speed of motor
   analogWrite(motorIn2,0);  //stop the motorIn2 pin of motor
 }
 
-
-
-
 void stopFan() {
   analogWrite(motorIn1, 0);
   analogWrite(motorIn2, 0);
 }
-
-
-
 
 void temp() {
   // --- Read temperature ---
@@ -138,13 +96,6 @@ void temp() {
     Serial.print("Temperature: ");
     Serial.print(temp);
     Serial.println(" °C");
-
-
-
-
-
-
-
 
     // --- Control logic ---
     if (tempControlEnabled && temp >= tempThreshold) {
